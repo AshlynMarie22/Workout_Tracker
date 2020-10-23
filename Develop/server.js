@@ -13,7 +13,6 @@ app.use(logger("dev"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(express.static("public"));
 
 mongoose.connect(
@@ -25,8 +24,7 @@ mongoose.connect(
       useFindAndModify: false,
     }
   );
-  const connection = mongoose.connection;
-
+const connection = mongoose.connection;
 connection.on("connected", () => {
   console.log("Mongoose successfully connected.");
 });
