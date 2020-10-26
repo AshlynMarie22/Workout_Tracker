@@ -2,10 +2,12 @@ let mongoose = require("mongoose");
 let db = require("../models");
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/workout-tracker", {
-  useNewUrlParser: true,
-  useFindAndModify: false
-});
+  process.env.MONGODB_URI || "mongodb://localhost/workout-tracker",
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  }
+);
 
 let workoutSeed = [
   {
@@ -54,9 +56,9 @@ let workoutSeed = [
         type: "cardio",
         name: "Running",
         duration: 25,
-        distance: 4
-      }
-    ]
+        distance: 4,
+      },
+    ],
   },
   {
     day: new Date().setDate(new Date().getDate() - 6),
@@ -67,9 +69,9 @@ let workoutSeed = [
         duration: 20,
         weight: 285,
         reps: 10,
-        sets: 4
-      }
-    ]
+        sets: 4,
+      },
+    ],
   },
   {
     day: new Date().setDate(new Date().getDate() - 5),
