@@ -1,4 +1,3 @@
-const { Router } = require("express");
 const express = require("express");
 const router = express.Router();
 
@@ -19,8 +18,9 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
-router.get("/api/workouts/:id", (req, res) => {
-  db.Workout.findById(req.params.id)
+router.get("/api/workouts/range", (req, res) => {
+  db.Workout.find({})
+    .limit(7)
     .then((foundWorkout) => {
       res.json(foundWorkout);
     })
@@ -29,7 +29,7 @@ router.get("/api/workouts/:id", (req, res) => {
       res.json({
         error: true,
         data: null,
-        message: `Failed to retrieve Workout with id: ${req.params.id}`,
+        message: `Failed to retrieve Workout data`,
       });
     });
 });
@@ -50,9 +50,13 @@ router.post("/api/workouts", (req, res) => {
 });
 
 router.put("/api/workouts/:id", (req, res) => {
-  db.Workout.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then((updatedWorkout) => {
-      res.json(updatedWorkout);
+  db.Workout.findByIdAndUpdate(
+    req.params.id,
+    { $push: { exercises: req.body } },
+    { new: true }
+  )
+    .then((updatedExercise) => {
+      res.json(updatedExercise);
     })
     .catch((err) => {
       console.log(err);

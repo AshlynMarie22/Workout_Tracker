@@ -17,7 +17,7 @@ const WorkoutSchema = new Schema({
 
       type: {
         type: String,
-        trim: true,
+        trim: false,
         required: "Type is required",
       },
       weight: {
@@ -42,14 +42,16 @@ const WorkoutSchema = new Schema({
       },
     },
   ],
+},
+{
   toJSON:{
     virtuals: true
   }
 });
 
 WorkoutSchema.virtual("totalDuration").get(function (){
-  return.this.exercises.reduce((total, exercises)=>{
-    return total + exercises.duration;
+  return this.exercises.reduce((total, exercise)=>{
+    return total + exercise.duration;
   }, 0);
 });
 

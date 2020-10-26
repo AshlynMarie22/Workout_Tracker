@@ -1,5 +1,5 @@
 const express = require("express");
-const logger = require("morgan");
+// const logger = require("morgan");
 const mongoose = require("mongoose");
 const app = express();
 
@@ -9,14 +9,14 @@ const workoutController = require("./controllers/workoutController.js");
 const htmlController = require("./controllers/htmlController.js");
 
 
-app.use(logger("dev"));
+// app.use(logger("dev"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/workout_tracker",
+    process.env.MONGODB_URI || "mongodb://localhost/workout-tracker",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
